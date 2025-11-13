@@ -5,16 +5,17 @@ const { verifyToken } = require('../utils/token');
 
 const router = express.Router();
 
-router.post('/', verifyToken, async (req, res) => {
+// router.post('/', verifyToken, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         // console.log(req.body);
-        const existingUser = await User.findOne({
-            email: req.body.email
-        })
+        // const existingUser = await User.findOne({
+        //     email: req.body.email
+        // })
 
-        if (existingUser) {
-            return res.status(400).json({success: false, message: 'User already exists', data: {}});
-        }
+        // if (existingUser) {
+        //     return res.status(400).json({success: false, message: 'User already exists', data: {}});
+        // }
 
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(req.body.password, salt);
